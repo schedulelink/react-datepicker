@@ -15,6 +15,21 @@ export default class Week extends React.Component {
     disabledKeyboardNavigation: PropTypes.bool,
     day: PropTypes.instanceOf(Date).isRequired,
     dayClassName: PropTypes.func,
+    dayModifierClassNames: PropTypes.shape({
+      disabled: PropTypes.string,
+      excluded: PropTypes.string,
+      selected: PropTypes.string,
+      keyboardSelected: PropTypes.string,
+      rangeStart: PropTypes.string,
+      rangeEnd: PropTypes.string,
+      inRange: PropTypes.string,
+      inSelectingRange: PropTypes.string,
+      selectingRangeStart: PropTypes.string,
+      selectingRangeEnd: PropTypes.string,
+      today: PropTypes.string,
+      weekend: PropTypes.string,
+      outsideMonth: PropTypes.string,
+    }),
     disabledDayAriaLabelPrefix: PropTypes.string,
     chooseDayAriaLabelPrefix: PropTypes.string,
     endDate: PropTypes.instanceOf(Date),
@@ -128,6 +143,7 @@ export default class Week extends React.Component {
             startDate={this.props.startDate}
             endDate={this.props.endDate}
             dayClassName={this.props.dayClassName}
+            dayModifierClassNames={this.props.dayModifierClassNames}
             renderDayContents={this.props.renderDayContents}
             disabledKeyboardNavigation={this.props.disabledKeyboardNavigation}
             handleOnKeyDown={this.props.handleOnKeyDown}

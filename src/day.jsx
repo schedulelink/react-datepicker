@@ -24,6 +24,21 @@ export default class Day extends React.Component {
     disabledKeyboardNavigation: PropTypes.bool,
     day: PropTypes.instanceOf(Date).isRequired,
     dayClassName: PropTypes.func,
+    dayModifierClassNames: PropTypes.shape({
+      disabled: PropTypes.string,
+      excluded: PropTypes.string,
+      selected: PropTypes.string,
+      keyboardSelected: PropTypes.string,
+      rangeStart: PropTypes.string,
+      rangeEnd: PropTypes.string,
+      inRange: PropTypes.string,
+      inSelectingRange: PropTypes.string,
+      selectingRangeStart: PropTypes.string,
+      selectingRangeEnd: PropTypes.string,
+      today: PropTypes.string,
+      weekend: PropTypes.string,
+      outsideMonth: PropTypes.string,
+    }),
     endDate: PropTypes.instanceOf(Date),
     highlightDates: PropTypes.instanceOf(Map),
     inline: PropTypes.bool,
@@ -218,9 +233,29 @@ export default class Day extends React.Component {
     const dayClassName = this.props.dayClassName
       ? this.props.dayClassName(date)
       : undefined;
+    const { dayModifierClassNames } = this.props;
+    let dayModifiers;
+    if (dayModifierClassNames) {
+      dayModifiers = {
+        [dayModifierClassNames.disabled]: this.isDisabled() && dayModifierClassNames.disabled,
+        [dayModifierClassNames.excluded]: this.isExcluded() && dayModifierClassNames.excluded,
+        [dayModifierClassNames.selected]: this.isSameDay(this.props.selected) && dayModifierClassNames.selected,
+        [dayModifierClassNames.keyboardSelected]: this.isKeyboardSelected() && dayModifierClassNames.keyboardSelected,
+        [dayModifierClassNames.rangeStart]: this.isRangeStart() && dayModifierClassNames.rangeStart,
+        [dayModifierClassNames.rangeEnd]: this.isRangeEnd() && dayModifierClassNames.rangeEnd,
+        [dayModifierClassNames.inRange]: this.isInRange() && dayModifierClassNames.inRange,
+        [dayModifierClassNames.inSelectingRange]: this.isInSelectingRange() && dayModifierClassNames.inSelectingRange,
+        [dayModifierClassNames.selectingRangeStart]: this.isSelectingRangeStart() && dayModifierClassNames.selectingRangeStart,
+        [dayModifierClassNames.selectingRangeEnd]: this.isSelectingRangeEnd() && dayModifierClassNames.selectingRangeEnd,
+        [dayModifierClassNames.today]: this.isSameDay(newDate()) && dayModifierClassNames.today,
+        [dayModifierClassNames.weekend]: this.isWeekend() && dayModifierClassNames.weekend,
+        [dayModifierClassNames.outsideMonth]: this.isOutsideMonth() && dayModifierClassNames.outsideMonth,
+      }
+    }
     return classnames(
       "react-datepicker__day",
       dayClassName,
+      dayModifiers,
       "react-datepicker__day--" + getDayOfWeekCode(this.props.day),
       {
         "react-datepicker__day--disabled": this.isDisabled(),

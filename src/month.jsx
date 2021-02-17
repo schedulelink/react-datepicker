@@ -14,6 +14,21 @@ export default class Month extends React.Component {
     disabledKeyboardNavigation: PropTypes.bool,
     day: PropTypes.instanceOf(Date).isRequired,
     dayClassName: PropTypes.func,
+    dayModifierClassNames: PropTypes.shape({
+      disabled: PropTypes.string,
+      excluded: PropTypes.string,
+      selected: PropTypes.string,
+      keyboardSelected: PropTypes.string,
+      rangeStart: PropTypes.string,
+      rangeEnd: PropTypes.string,
+      inRange: PropTypes.string,
+      inSelectingRange: PropTypes.string,
+      selectingRangeStart: PropTypes.string,
+      selectingRangeEnd: PropTypes.string,
+      today: PropTypes.string,
+      weekend: PropTypes.string,
+      outsideMonth: PropTypes.string,
+    }),
     monthClassName: PropTypes.func,
     endDate: PropTypes.instanceOf(Date),
     orderInDisplay: PropTypes.number,
@@ -170,6 +185,7 @@ export default class Month extends React.Component {
           startDate={this.props.startDate}
           endDate={this.props.endDate}
           dayClassName={this.props.dayClassName}
+          dayModifierClassNames={this.props.dayModifierClassNames}
           setOpen={this.props.setOpen}
           shouldCloseOnSelect={this.props.shouldCloseOnSelect}
           disabledKeyboardNavigation={this.props.disabledKeyboardNavigation}

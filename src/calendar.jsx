@@ -83,6 +83,21 @@ export default class Calendar extends React.Component {
     dateFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
       .isRequired,
     dayClassName: PropTypes.func,
+    dayModifierClassNames: PropTypes.shape({
+      disabled: PropTypes.string,
+      excluded: PropTypes.string,
+      selected: PropTypes.string,
+      keyboardSelected: PropTypes.string,
+      rangeStart: PropTypes.string,
+      rangeEnd: PropTypes.string,
+      inRange: PropTypes.string,
+      inSelectingRange: PropTypes.string,
+      selectingRangeStart: PropTypes.string,
+      selectingRangeEnd: PropTypes.string,
+      today: PropTypes.string,
+      weekend: PropTypes.string,
+      outsideMonth: PropTypes.string,
+    }),
     weekDayClassName: PropTypes.func,
     disabledDayAriaLabelPrefix: PropTypes.string,
     monthClassName: PropTypes.func,
@@ -786,6 +801,7 @@ export default class Calendar extends React.Component {
             onChange={this.changeMonthYear}
             day={monthDate}
             dayClassName={this.props.dayClassName}
+            dayModifierClassNames={this.props.dayModifierClassNames}
             monthClassName={this.props.monthClassName}
             onDayClick={this.handleDayClick}
             handleOnKeyDown={this.props.handleOnKeyDown}

@@ -138,6 +138,21 @@ export default class DatePicker extends React.Component {
     dateFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     dateFormatCalendar: PropTypes.string,
     dayClassName: PropTypes.func,
+    dayModifierClassNames: PropTypes.shape({
+      disabled: PropTypes.string,
+      excluded: PropTypes.string,
+      selected: PropTypes.string,
+      keyboardSelected: PropTypes.string,
+      rangeStart: PropTypes.string,
+      rangeEnd: PropTypes.string,
+      inRange: PropTypes.string,
+      inSelectingRange: PropTypes.string,
+      selectingRangeStart: PropTypes.string,
+      selectingRangeEnd: PropTypes.string,
+      today: PropTypes.string,
+      weekend: PropTypes.string,
+      outsideMonth: PropTypes.string,
+    }),
     weekDayClassName: PropTypes.func,
     disabledDayAriaLabelPrefix: PropTypes.string,
     monthClassName: PropTypes.func,
@@ -862,6 +877,7 @@ export default class DatePicker extends React.Component {
         onMonthChange={this.props.onMonthChange}
         onYearChange={this.props.onYearChange}
         dayClassName={this.props.dayClassName}
+        dayModifierClassNames={this.props.dayModifierClassNames}
         weekDayClassName={this.props.weekDayClassName}
         monthClassName={this.props.monthClassName}
         timeClassName={this.props.timeClassName}
